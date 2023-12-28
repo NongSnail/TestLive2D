@@ -6,6 +6,7 @@ import LoginPage from './components/pages/LoginPage.vue';
 import RegisterPage from './components/pages/RegisterPage.vue';
 import VirtualAssistant from './components/pages/VirtualAssistant.vue';
 
+
 const routes = [
   { path: '/', component: LoginPage },
   { path: '/register', component: RegisterPage },
@@ -13,7 +14,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/Samples/TypeScript/Demo'),
   routes,
 });
 

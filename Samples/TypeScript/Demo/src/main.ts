@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from './components/pages/LoginPage.vue';
 import RegisterPage from './components/pages/RegisterPage.vue';
 import VirtualAssistant from './components/pages/VirtualAssistant.vue';
+import * as _ from './logic/main';
 
 
 const routes = [
@@ -25,3 +26,5 @@ app.use(router);
 
 // Mount the app to the #app element
 app.mount('#app');
+
+_

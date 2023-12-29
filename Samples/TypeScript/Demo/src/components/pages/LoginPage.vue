@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col md:flex-row h-screen items-center">
     <div
-      class="bg-blue-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen"
+      class="bg-blue-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen" id="canvasContainer"
     ></div>
 
     <div

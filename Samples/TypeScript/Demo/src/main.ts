@@ -15,7 +15,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('/Samples/TypeScript/Demo'),
+  history: createWebHistory(),
   routes,
 });
 

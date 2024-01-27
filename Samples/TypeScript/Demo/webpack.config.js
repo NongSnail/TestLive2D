@@ -5,16 +5,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'production',
   target: ['web', 'es5'],
-  entry: './src/main.ts',
+  entry: { 
+    'main' : './src/main.ts',
+    'core' : './live2dcubismcore.min.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/Samples/TypeScript/Demo/dist/'
+    filename: ({ chunk }) => {
+      return chunk.name === 'main' ? 'bundle.js' : '[name].js';
+  },
+    publicPath: './dist/'
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue'],
     alias: {
-      '@framework': path.resolve(__dirname, '../../../Framework/src')
+      '@framework': path.resolve(__dirname, '../../../Framework/src'),
+      // 'Live2DCubismCore': path.resolve(__dirname,'../../../Core/live2dcubismcore.js')
     }
   },
   module: {
@@ -58,7 +64,7 @@ module.exports = {
   devServer: {
     static: [
       {
-        directory: path.resolve(__dirname, '../../..'),
+        directory: path.resolve(__dirname, '/'),
         serveIndex: true,
         watch: true,
       }

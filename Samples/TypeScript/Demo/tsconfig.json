@@ -13,11 +13,12 @@
       "@framework/*": ["../../../Framework/src/*"]
     },
     "noImplicitAny": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "allowJs": true
   },
   "include": [
     "src/**/*.ts",
-    "../../../Core/*.ts",
+    "../../../Core/*.ts"
   ],
   "exclude": [
     "node_modules",

@@ -12,12 +12,13 @@ import { LogLevel } from '@framework/live2dcubismframework';
  */
 
 // Canvas width and height pixel values, or dynamic screen size ('auto').
-export const CanvasSize: { width: number; height: number } | 'auto' = 'auto';
+export const CanvasSize: { width: number; height: number } | 'auto' = { width: 1800, height: 900 };
+
 
 // 画面
-export const ViewScale = 1.0;
-export const ViewMaxScale = 2.0;
-export const ViewMinScale = 0.8;
+export const ViewScale = 20.0;
+export const ViewMaxScale = 40.0;
+export const ViewMinScale = 16.0;
 
 export const ViewLogicalLeft = -1.0;
 export const ViewLogicalRight = 1.0;
@@ -33,10 +34,10 @@ export const ViewLogicalMaxTop = 2.0;
 export const ResourcesPath = '../../src/assets/';
 
 // モデルの後ろにある背景の画像ファイル
-export const BackImageName = 'back_class_normal.png';
+export const BackImageName = '137931-anime-landscape-library-nature.png';
 
 // 歯車
-export const GearImageName = 'icon_gear.png';
+// export const GearImageName = 'icon_gear.png';
 
 // 終了ボタン
 export const PowerImageName = 'CloseNormal.png';
@@ -46,7 +47,7 @@ export const PowerImageName = 'CloseNormal.png';
 // ディレクトリ名とmodel3.jsonの名前を一致させておくこと
 export const ModelDir: string[] = [
   // 'Haru',
-  'hijiki',
+  'tororo',
   // 'Hiyori',
   // 'Mark',
   // 'Natori',
@@ -81,5 +82,5 @@ export const DebugTouchLogEnable = false;
 export const CubismLoggingLevel: LogLevel = LogLevel.LogLevel_Verbose;
 
 // デフォルトのレンダーターゲットサイズ
-export const RenderTargetWidth = 1900;
-export const RenderTargetHeight = 1000;
+export const RenderTargetWidth = CanvasSize.width;
+export const RenderTargetHeight = CanvasSize.height;

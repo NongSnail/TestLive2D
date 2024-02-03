@@ -14,6 +14,7 @@ import {
 } from './utils/cubismdebug';
 import { Value } from './utils/cubismjson';
 
+
 export function strtod(s: string, endPtr: string[]): number {
   let index = 0;
   for (let i = 1; ; i++) {

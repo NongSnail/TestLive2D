@@ -6,18 +6,22 @@ module.exports = {
   mode: 'production',
   target: ['web', 'es5'],
   entry: { 
-    'main' : './src/main.ts',
-    'core' : './live2dcubismcore.min.js'
+    'main': [
+      '../../../Core/live2dcubismcore.min.js', './src/main.ts'
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: ({ chunk }) => {
-      return chunk.name === 'main' ? 'bundle.js' : '[name].js';
-  },
+    filename: 'bundle.js',
     publicPath: './dist/'
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue'],
+    fallback: {
+      "fs": false,
+      "os": false,
+      "path": false,
+    },
     alias: {
       '@framework': path.resolve(__dirname, '../../../Framework/src'),
       // 'Live2DCubismCore': path.resolve(__dirname,'../../../Core/live2dcubismcore.js')
@@ -59,6 +63,7 @@ module.exports = {
     new HtmlWebpackPlugin({
     template: 'index.html',
     filename: 'index.html',
+    inject: false // Disable automatic script injection
   }),
   ],
   devServer: {

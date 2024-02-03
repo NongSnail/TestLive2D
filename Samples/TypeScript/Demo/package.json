@@ -70,6 +70,11 @@
     "vue-router": "^4.2.5",
     "whatwg-fetch": "^3.6.19"
   },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
   "optionalDependencies": {
     "fsevents": "*"
   }

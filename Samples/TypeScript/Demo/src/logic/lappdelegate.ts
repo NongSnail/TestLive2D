@@ -54,13 +54,18 @@ export class LAppDelegate {
     // キャンバスを DOM に追加
     // document.body.appendChild(canvas);
 
+    // canvas.classList.add('lg:block')
+    canvas.classList.add('w-full')
+    // canvas.classList.add('md:w-1/2')
+    // canvas.classList.add('xl:w-2/3')
+    canvas.classList.add('h-screen')
     document.getElementById('canvasContainer').appendChild(canvas);
 
     if (LAppDefine.CanvasSize === 'auto') {
-      this._resizeCanvas();
+      // this._resizeCanvas();
     } else {
-      canvas.width = LAppDefine.CanvasSize.width;
-      canvas.height = LAppDefine.CanvasSize.height;
+      // canvas.width = LAppDefine.CanvasSize.width;
+      // canvas.height = LAppDefine.CanvasSize.height;
     }
 
     if (!frameBuffer) {
@@ -273,6 +278,8 @@ export class LAppDelegate {
    * Resize the canvas to fill the screen.
    */
   private _resizeCanvas(): void {
+    console.log(canvas.clientWidth, window.devicePixelRatio, canvas.clientWidth * window.devicePixelRatio)
+    console.log(canvas.clientHeight, window.devicePixelRatio, canvas.clientHeight * window.devicePixelRatio)
     canvas.width = canvas.clientWidth * window.devicePixelRatio;
     canvas.height = canvas.clientHeight * window.devicePixelRatio;
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);

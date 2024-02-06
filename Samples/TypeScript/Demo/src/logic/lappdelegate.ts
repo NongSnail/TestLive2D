@@ -54,18 +54,22 @@ export class LAppDelegate {
     // キャンバスを DOM に追加
     // document.body.appendChild(canvas);
 
+    
+    const canvasContainer = document.getElementById('canvasContainer')
     // canvas.classList.add('lg:block')
     canvas.classList.add('w-full')
     // canvas.classList.add('md:w-1/2')
     // canvas.classList.add('xl:w-2/3')
     canvas.classList.add('h-screen')
-    document.getElementById('canvasContainer').appendChild(canvas);
+    canvas.width = canvasContainer.parentElement.offsetWidth;
+    canvas.height = canvasContainer.parentElement.offsetHeight;
+    canvasContainer.appendChild(canvas);
 
     if (LAppDefine.CanvasSize === 'auto') {
-      // this._resizeCanvas();
+      this._resizeCanvas();
     } else {
-      // canvas.width = LAppDefine.CanvasSize.width;
-      // canvas.height = LAppDefine.CanvasSize.height;
+      canvas.width = LAppDefine.CanvasSize.width;
+      canvas.height = LAppDefine.CanvasSize.height;
     }
 
     if (!frameBuffer) {
@@ -104,6 +108,7 @@ export class LAppDelegate {
    * Resize canvas and re-initialize view.
    */
   public onResize(): void {
+    console.debug('RESIZING')
     this._resizeCanvas();
     this._view.initialize();
     this._view.initializeSprite();

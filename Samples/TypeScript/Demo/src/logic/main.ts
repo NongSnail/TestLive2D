@@ -7,33 +7,50 @@
 
 import { LAppDelegate } from './lappdelegate';
 import * as LAppDefine from './lappdefine';
-import { LAppGlManager } from './lappglmanager';
+// import { LAppGlManager } from './lappglmanager';
+
+// (function(){
+//   console.log('called before debug');
+//   if (
+//     !LAppGlManager.getInstance() ||
+//     !LAppDelegate.getInstance().initialize()
+//   ) {
+//     return;
+//   }
+
+//   LAppDelegate.getInstance().run();
+//   // console.log('model should\'ve been loaded');
+// })();
 
 /**
  * ブラウザロード後の処理
  */
-window.addEventListener(
-  'load',
-  (): void => {
-    // Initialize WebGL and create the application instance
-    if (
-      !LAppGlManager.getInstance() ||
-      !LAppDelegate.getInstance().initialize()
-    ) {
-      return;
-    }
+// window.addEventListener(
+//   'load',
+//   (): void => {
+//     // Initialize WebGL and create the application instance
+//     if (
+//       !LAppGlManager.getInstance() ||
+//       !LAppDelegate.getInstance().initialize()
+//     ) {
+//       return;
+//     }
 
-    LAppDelegate.getInstance().run();
-  },
-  { passive: true }
-);
+//     LAppDelegate.getInstance().run();
+//     // console.log('model should\'ve been loaded');
+//   },
+//   { passive: true }
+// );
 
 /**
  * 終了時の処理
  */
 window.addEventListener(
   'beforeunload',
-  (): void => LAppDelegate.releaseInstance(),
+  (): void => {
+    LAppDelegate.releaseInstance();
+    console.log('UNLOADED!');
+  },
   { passive: true }
 );
 

@@ -83,14 +83,33 @@
 </template>
 
 <script>
+import { LAppDelegate } from '../../logic/lappdelegate';
+import * as LAppDefine from '../../logic/lappdefine';
+import { LAppGlManager } from '../../logic/lappglmanager';
+
 export default {
+  mounted() {
+    console.log('Login page mounted!');
+    if (
+      !LAppGlManager.getInstance() ||
+      !LAppDelegate.getInstance().initialize()
+    ) {
+      return;
+    }
+
+    LAppDelegate.getInstance().run();
+  },
   name: "LoginPage",
 };
 </script>
 
+
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { CubismLogPrint } from "@framework/utils/cubismdebug";
+
+console.log('debuggg', window.canvas);
 
 const email = ref("");
 const password = ref("");

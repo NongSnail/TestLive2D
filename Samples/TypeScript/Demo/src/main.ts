@@ -9,7 +9,7 @@ import * as _ from './logic/main';
 
 
 const routes = [
-  { path: '/', component: LoginPage },
+  { path: '/', component: VirtualAssistant },
   { path: '/register', component: RegisterPage },
   { path: '/VirtualAssistant', component: VirtualAssistant },
 ];

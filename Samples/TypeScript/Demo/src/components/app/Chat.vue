@@ -116,10 +116,11 @@ export default {
 
 <script setup>
 import { ref, reactive, watch, onMounted } from "vue";
+import { speakAssistantResponse } from "./Live2d.vue";
 
-const sdk = require("microsoft-cognitiveservices-speech-sdk");
-const key = "8d959935a5324cd6af89d3be89088263";
-const region = "southeastasia";
+// const sdk = require("microsoft-cognitiveservices-speech-sdk");
+// const key = "8d959935a5324cd6af89d3be89088263";
+// const region = "southeastasia";
 
 const userQueryText = ref("");
 const chatContainer = ref(null);
@@ -163,6 +164,7 @@ function handleUserSubmit() {
     content: userQueryText.value,
   };
   messages.push(userMsg);
+  speakAssistantResponse(userQueryText.value);
   userQueryText.value = "";
 
   scrollToBottom();
@@ -214,25 +216,25 @@ function handleUserSubmit() {
 }
 
 // Speak assistant's response using speech synthesis
-function speakAssistantResponse(content) {
-  const speechConfig = sdk.SpeechConfig.fromSubscription(key, region);
-  const speechSynthesizer = new sdk.SpeechSynthesizer(speechConfig);
+// function speakAssistantResponse(content) {
+//   const speechConfig = sdk.SpeechConfig.fromSubscription(key, region);
+//   const speechSynthesizer = new sdk.SpeechSynthesizer(speechConfig);
 
-  const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="th-TH"><voice name="th-TH-PremwadeeNeural"><prosody rate="-20.00%" volume="-50.00%" pitch="+40.00%">${content}</prosody></voice></speak>`;
+//   const ssml = `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="th-TH"><voice name="th-TH-PremwadeeNeural"><prosody pitch="+50.00%">${content}</prosody></voice></speak>`;
 
-  speechSynthesizer.speakSsmlAsync(
-    ssml,
-    (result) => {
-      speechSynthesizer.close();
-      result.audioData;
-    },
-    (error) => {
-      console.error("Speech synthesis error:", error);
-      alert("Speech synthesis error. Please try again.");
-      speechSynthesizer.close();
-    }
-  );
-}
+//   speechSynthesizer.speakSsmlAsync(
+//     ssml,
+//     (result) => {
+//       speechSynthesizer.close();
+//       result.audioData;
+//     },
+//     (error) => {
+//       console.error("Speech synthesis error:", error);
+//       alert("Speech synthesis error. Please try again.");
+//       speechSynthesizer.close();
+//     },
+//   );
+// }
 
 // Scroll to the bottom of the chat container
 function scrollToBottom() {

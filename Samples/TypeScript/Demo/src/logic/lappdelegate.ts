@@ -17,6 +17,12 @@ import { canvas, gl } from './lappglmanager';
 export let s_instance: LAppDelegate = null;
 export let frameBuffer: WebGLFramebuffer = null;
 
+/** global custom Window */
+// interface Live2DWindow extends Window {
+//   canvas: HTMLCanvasElement;
+// }
+// declare let window: Live2DWindow;
+
 /**
  * アプリケーションクラス。
  * Cubism SDKの管理を行う。
@@ -63,6 +69,8 @@ export class LAppDelegate {
     canvas.classList.add('h-screen')
     canvas.width = canvasContainer.parentElement.offsetWidth;
     canvas.height = canvasContainer.parentElement.offsetHeight;
+
+    // window.canvas = canvas;
     canvasContainer.appendChild(canvas);
 
     if (LAppDefine.CanvasSize === 'auto') {

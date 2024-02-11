@@ -364,4 +364,5 @@ declare namespace Live2DCubismCore {
         private constructor();
     }
     /** Emscripten Cubism Core module. */
+    
 }

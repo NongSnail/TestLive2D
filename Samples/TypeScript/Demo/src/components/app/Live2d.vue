@@ -52,19 +52,14 @@ export async function speakAssistantResponse(content) {
     audio.play();
     const lappl2dman = LAppLive2DManager.getInstance();
     const tororoModel = lappl2dman.getModel(0);
-    console.log('model no 0 before', lappl2dman.getModel(0));
-    tororoModel._wavFileHandler.loadWavFile(url);
-    console.log('model no 0 after', tororoModel);
-    // console.log('motion manager', tororoModel._motionManager.isFinished())
+    tororoModel._wavFileHandler.start(url);
     // tororoModel.startRandomMotion(
     //             MotionGroupTapBody,
     //             PriorityNormal,
     //             lappl2dman._finishedMotion
     //           );
-    // tororoModel._motionManager.stopAllMotions();
-    // console.log('motion manager', tororoModel._motionManager.isFinished())
     // console.log('URL', await blob.arrayBuffer());
-    // window.URL.revokeObjectURL(url);
+    setTimeout(() => window.URL.revokeObjectURL(url), 3000);
   // }
 
   // speechSynthesizer.speakSsmlAsync(

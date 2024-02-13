@@ -101,22 +101,159 @@ export class LAppWavFileHandler {
     return this._lastRms;
   }
 
-  public loadWavFile(filePath: string): boolean {
+  // public loadWavFile(filePath: string): boolean {
+  //   let ret = false;
+
+  //   if (this._pcmData != null) {
+  //     this.releasePcmData();
+  //   }
+
+  //   // ファイルロード
+  //   const asyncFileLoad = async () => {
+  //     return fetch(filePath).then(responce => {
+  //       return responce.arrayBuffer();
+  //     });
+  //   };
+
+  //   const asyncWavFileManager = (async () => {
+  //     this._byteReader._fileByte = await asyncFileLoad();
+  //     this._byteReader._fileDataView = new DataView(this._byteReader._fileByte);
+  //     this._byteReader._fileSize = this._byteReader._fileByte.byteLength;
+  //     this._byteReader._readOffset = 0;
+
+  //     // ファイルロードに失敗しているか、先頭のシグネチャ"RIFF"を入れるサイズもない場合は失敗
+  //     if (
+  //       this._byteReader._fileByte == null ||
+  //       this._byteReader._fileSize < 4
+  //     ) {
+  //       return false;
+  //     }
+
+  //     // ファイル名
+  //     this._wavFileInfo._fileName = filePath;
+
+  //     try {
+  //       // シグネチャ "RIFF"
+  //       if (!this._byteReader.getCheckSignature('RIFF')) {
+  //         ret = false;
+  //         throw new Error('Cannot find Signeture "RIFF".');
+  //       }
+  //       // ファイルサイズ-8（読み飛ばし）
+  //       this._byteReader.get32LittleEndian();
+  //       // シグネチャ "WAVE"
+  //       if (!this._byteReader.getCheckSignature('WAVE')) {
+  //         ret = false;
+  //         throw new Error('Cannot find Signeture "WAVE".');
+  //       }
+  //       // シグネチャ "fmt "
+  //       if (!this._byteReader.getCheckSignature('fmt ')) {
+  //         ret = false;
+  //         throw new Error('Cannot find Signeture "fmt".');
+  //       }
+  //       // fmtチャンクサイズ
+  //       const fmtChunkSize = this._byteReader.get32LittleEndian();
+  //       // フォーマットIDは1（リニアPCM）以外受け付けない
+  //       if (this._byteReader.get16LittleEndian() != 1) {
+  //         ret = false;
+  //         throw new Error('File is not linear PCM.');
+  //       }
+  //       // チャンネル数
+  //       this._wavFileInfo._numberOfChannels =
+  //         this._byteReader.get16LittleEndian();
+  //       // サンプリングレート
+  //       this._wavFileInfo._samplingRate = this._byteReader.get32LittleEndian();
+  //       // データ速度[byte/sec]（読み飛ばし）
+  //       this._byteReader.get32LittleEndian();
+  //       // ブロックサイズ（読み飛ばし）
+  //       this._byteReader.get16LittleEndian();
+  //       // 量子化ビット数
+  //       this._wavFileInfo._bitsPerSample = this._byteReader.get16LittleEndian();
+  //       // fmtチャンクの拡張部分の読み飛ばし
+  //       if (fmtChunkSize > 16) {
+  //         this._byteReader._readOffset += fmtChunkSize - 16;
+  //       }
+  //       // "data"チャンクが出現するまで読み飛ばし
+  //       while (
+  //         !this._byteReader.getCheckSignature('data') &&
+  //         this._byteReader._readOffset < this._byteReader._fileSize
+  //       ) {
+  //         this._byteReader._readOffset +=
+  //           this._byteReader.get32LittleEndian() + 4;
+  //       }
+  //       // ファイル内に"data"チャンクが出現しなかった
+  //       if (this._byteReader._readOffset >= this._byteReader._fileSize) {
+  //         ret = false;
+  //         throw new Error('Cannot find "data" Chunk.');
+  //       }
+  //       // サンプル数
+  //       {
+  //         const dataChunkSize = this._byteReader.get32LittleEndian();
+  //         this._wavFileInfo._samplesPerChannel =
+  //           (dataChunkSize * 8) /
+  //           (this._wavFileInfo._bitsPerSample *
+  //             this._wavFileInfo._numberOfChannels);
+  //       }
+  //       // 領域確保
+  //       this._pcmData = new Array(this._wavFileInfo._numberOfChannels);
+  //       for (
+  //         let channelCount = 0;
+  //         channelCount < this._wavFileInfo._numberOfChannels;
+  //         channelCount++
+  //       ) {
+  //         this._pcmData[channelCount] = new Float32Array(
+  //           this._wavFileInfo._samplesPerChannel
+  //         );
+  //       }
+  //       // 波形データ取得
+  //       for (
+  //         let sampleCount = 0;
+  //         sampleCount < this._wavFileInfo._samplesPerChannel;
+  //         sampleCount++
+  //       ) {
+  //         for (
+  //           let channelCount = 0;
+  //           channelCount < this._wavFileInfo._numberOfChannels;
+  //           channelCount++
+  //         ) {
+  //           this._pcmData[channelCount][sampleCount] = this.getPcmSample();
+  //         }
+  //       }
+
+  //       ret = true;
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   })();
+
+  //   return ret;
+  // }
+
+  public loadWavFile(filePath: any): boolean {
     let ret = false;
 
     if (this._pcmData != null) {
+      console.log('RELEASING PCM DATA')
       this.releasePcmData();
     }
 
     // ファイルロード
     const asyncFileLoad = async () => {
-      return fetch(filePath).then(responce => {
-        return responce.arrayBuffer();
-      });
+      if (typeof filePath === "string") {
+        console.log("asyncFileLoad string", filePath)
+        return fetch(filePath).then(responce => {
+          // console.log("asyncFileLoad string", responce.arrayBuffer())
+          return responce.arrayBuffer();
+        });
+      }
+      else {
+        return filePath.arrayBuffer();
+      }
     };
+
 
     const asyncWavFileManager = (async () => {
       this._byteReader._fileByte = await asyncFileLoad();
+      console.log('asyncWavFileManager', this._byteReader._fileByte)
       this._byteReader._fileDataView = new DataView(this._byteReader._fileByte);
       this._byteReader._fileSize = this._byteReader._fileByte.byteLength;
       this._byteReader._readOffset = 0;

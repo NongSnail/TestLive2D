@@ -221,19 +221,35 @@ function handleUserSubmit() {
 //   const speechSynthesizer = new sdk.SpeechSynthesizer(speechConfig);
 
 //   const ssml = `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="th-TH"><voice name="th-TH-PremwadeeNeural"><prosody pitch="+50.00%">${content}</prosody></voice></speak>`;
+//   const requestHeaders = new Headers();
+//     requestHeaders.set('Content-Type', 'application/ssml+xml');
+//     requestHeaders.set('X-Microsoft-OutputFormat', 'riff-8khz-16bit-mono-pcm');
+//     requestHeaders.set('Ocp-Apim-Subscription-Key', key);
 
-//   speechSynthesizer.speakSsmlAsync(
-//     ssml,
-//     (result) => {
-//       speechSynthesizer.close();
-//       result.audioData;
-//     },
-//     (error) => {
-//       console.error("Speech synthesis error:", error);
-//       alert("Speech synthesis error. Please try again.");
-//       speechSynthesizer.close();
-//     },
-//   );
+//   const response = fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+//       method: 'POST',
+//       headers: requestHeaders,
+//       body: ssml
+//     });
+
+//     const blob = response.blob();
+
+//     var url = window.URL.createObjectURL(blob)
+//     return url;
+//   }
+
+  // speechSynthesizer.speakSsmlAsync(
+  //   ssml,
+  //   (result) => {
+  //     speechSynthesizer.close();
+  //     result.audioData;
+  //   },
+  //   (error) => {
+  //     console.error("Speech synthesis error:", error);
+  //     alert("Speech synthesis error. Please try again.");
+  //     speechSynthesizer.close();
+  //   },
+  // );
 // }
 
 // Scroll to the bottom of the chat container

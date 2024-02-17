@@ -628,6 +628,7 @@ export class LAppModel extends CubismUserModel {
     priority: number,
     onFinishedMotionHandler?: FinishedMotionCallback
   ): CubismMotionQueueEntryHandle {
+    console.log('START RANDOM MOTION')
     if (this._modelSetting.getMotionCount(group) == 0) {
       return InvalidMotionQueueEntryHandleValue;
     }
@@ -636,6 +637,7 @@ export class LAppModel extends CubismUserModel {
       Math.random() * this._modelSetting.getMotionCount(group)
     );
 
+    console.log('START RANDOM MOTION BEFORE', group, no, 'RETURN')
     return this.startMotion(group, no, priority, onFinishedMotionHandler);
   }
 

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { MotionGroupTapBody, PriorityNormal } from "../../logic/lappdefine";
+import { MotionGroupIdle, MotionGroupTapBody, PriorityForce, PriorityIdle, PriorityNormal } from "../../logic/lappdefine";
 import { LAppLive2DManager } from "../../logic/lapplive2dmanager";
 import { LAppDelegate } from "../../logic/lappdelegate";
 import { LAppGlManager } from "../../logic/lappglmanager";
@@ -53,11 +53,13 @@ export async function speakAssistantResponse(content) {
     const lappl2dman = LAppLive2DManager.getInstance();
     const tororoModel = lappl2dman.getModel(0);
     tororoModel._wavFileHandler.start(url);
-    // tororoModel.startRandomMotion(
-    //             MotionGroupTapBody,
-    //             PriorityNormal,
-    //             lappl2dman._finishedMotion
-    //           );
+    // console.log(tororoModel._wavFileHandler)
+    tororoModel.startMotion(
+                'Idle',
+                2,
+                PriorityForce,
+                lappl2dman._finishedMotion
+              );
     // console.log('URL', await blob.arrayBuffer());
     setTimeout(() => window.URL.revokeObjectURL(url), 3000);
   // }
